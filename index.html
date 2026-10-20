@@ -1,0 +1,713 @@
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You, Sayang ♡</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #dedede;
+  --paper: #f8f8f8;
+  --white: #fff;
+  --dark: #292929;
+  --gray: #777;
+  --silver: #bdbdbd;
+  --line: #d1d1d1;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--dark);
+  font-family: 'DM Sans', sans-serif;
+  overflow: hidden;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 22px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.brand {
+  font-weight: 700;
+}
+
+.counter {
+  color: var(--gray);
+}
+
+#petals {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.petal {
+  position: absolute;
+  top: -30px;
+  color: #fff;
+  opacity: .8;
+  text-shadow: 0 1px 5px #999;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+.slides {
+  position: relative;
+  height: 100dvh;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  padding: 78px 22px 85px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(22px);
+  transition: opacity .4s, transform .4s, visibility .4s;
+}
+
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  z-index: 2;
+}
+
+.content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 470px;
+  margin: auto;
+}
+
+.eyebrow {
+  color: var(--gray);
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 17px;
+}
+
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+}
+
+h1 {
+  font-size: clamp(48px, 12vw, 78px);
+  line-height: 1.08;
+  letter-spacing: -2px;
+}
+
+h1 em, h2 em {
+  color: var(--gray);
+  font-weight: 500;
+}
+
+.intro {
+  max-width: 335px;
+  margin: 20px 0 25px;
+  color: var(--gray);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.btn {
+  background: var(--dark);
+  color: white;
+  border: 1px solid var(--dark);
+  padding: 14px 18px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  transition: .25s;
+}
+
+.btn:hover {
+  background: #555;
+  transform: translateY(-2px);
+}
+
+.btn.light {
+  background: transparent;
+  color: var(--dark);
+  border-color: var(--line);
+}
+
+.btn.light:hover {
+  background: #eaeaea;
+}
+
+.center {
+  text-align: center;
+}
+
+.center .intro {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.flower-garden {
+  height: 145px;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 13px;
+  margin: 0 auto 23px;
+}
+
+.flower {
+  font-size: 52px;
+  color: #888;
+  filter: grayscale(1);
+  transform-origin: bottom center;
+  animation: sway 3s ease-in-out infinite;
+}
+
+.flower:nth-child(2) {
+  font-size: 72px;
+  animation-delay: -.8s;
+}
+
+.flower:nth-child(3) {
+  animation-delay: -1.5s;
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+.card {
+  background: var(--paper);
+  border: 1px solid #d5d5d5;
+  padding: clamp(20px, 5vw, 32px);
+  box-shadow: 6px 7px 0 #c9c9c9;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e2e2e2;
+  margin-bottom: 22px;
+  color: var(--gray);
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+h2 {
+  font-size: clamp(32px, 8vw, 45px);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+#typed {
+  font: 500 14px/1.95 'Playfair Display', serif;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  min-height: 100px;
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 15px;
+  background: var(--dark);
+  vertical-align: -2px;
+  animation: blink .7s steps(2) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.signature {
+  font: italic 14px 'Playfair Display', serif;
+  color: var(--gray);
+  margin-top: 20px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 23px;
+}
+
+.music-card {
+  background: var(--paper);
+  border: 1px solid #d3d3d3;
+  padding: 15px;
+  box-shadow: 5px 5px 0 #c9c9c9;
+}
+
+.music-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.album-art {
+  width: 65px;
+  height: 65px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #eee, #aaa);
+  font-size: 26px;
+}
+
+.music-title {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.music-sub {
+  font-size: 10px;
+  color: var(--gray);
+  margin-top: 5px;
+  line-height: 1.7;
+}
+
+iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 8px;
+}
+
+.music-note {
+  font-size: 10px;
+  color: var(--gray);
+  line-height: 1.8;
+  margin-top: 13px;
+}
+
+.spotify-link {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 10px;
+  color: var(--dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.divider {
+  width: 45px;
+  height: 1px;
+  background: #999;
+  margin: 22px auto;
+}
+
+.closing {
+  font: italic 23px/1.65 'Playfair Display', serif;
+  margin: 22px auto;
+  max-width: 380px;
+}
+
+.progress {
+  position: fixed;
+  bottom: 24px;
+  left: 7%;
+  display: flex;
+  gap: 6px;
+  z-index: 10;
+}
+
+.progress span {
+  width: 17px;
+  height: 3px;
+  background: #bcbcbc;
+  transition: .3s;
+}
+
+.progress span.active {
+  width: 30px;
+  background: var(--dark);
+}
+
+.nav-buttons {
+  position: fixed;
+  right: 7%;
+  bottom: 13px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.arrow {
+  height: 39px;
+  width: 39px;
+  border: 1px solid #c5c5c5;
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--dark);
+}
+
+.arrow:disabled {
+  opacity: .3;
+  cursor: default;
+}
+
+@media (max-height: 680px) {
+  .slide {
+    padding-top: 65px;
+    padding-bottom: 75px;
+  }
+
+  .flower-garden {
+    height: 95px;
+  }
+
+  .flower {
+    font-size: 40px;
+  }
+
+  .flower:nth-child(2) {
+    font-size: 55px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="petals"></div>
+
+<header>
+  <div class="brand">A little something ♡</div>
+  <div class="counter" id="counter">01 / 05</div>
+</header>
+
+<main class="slides">
+
+  <!-- STEP 1: OPENING -->
+  <section class="slide active">
+    <div class="content">
+      <div class="eyebrow">A little corner of the world</div>
+
+      <h1>Made with<br>a little <em>love.</em></h1>
+
+      <p class="intro">
+        A tiny website, a few flowers, and a whole lot of things
+        I've been wanting to tell you.
+      </p>
+
+      <button class="btn" onclick="goTo(1)">
+        OPEN YOUR LITTLE GIFT ↗
+      </button>
+
+      <p style="font-size:10px;color:#888;margin-top:24px;">
+        made especially for you, sayang.
+      </p>
+    </div>
+  </section>
+
+  <!-- STEP 2: FLOWERS -->
+  <section class="slide">
+    <div class="content center">
+      <div class="eyebrow">Step one · A garden for you</div>
+
+      <div class="flower-garden">
+        <span class="flower">✿</span>
+        <span class="flower">❀</span>
+        <span class="flower">✿</span>
+      </div>
+
+      <h2>A little garden,<br><em>just for you.</em></h2>
+
+      <p class="intro">
+        If I could give you a garden, I'd fill it with flowers
+        that remind me of all the little reasons I adore you.
+      </p>
+
+      <button class="btn" onclick="goTo(2)">
+        THERE'S MORE, SAYANG ♡
+      </button>
+    </div>
+  </section>
+
+  <!-- STEP 3: LOVE LETTER -->
+  <section class="slide">
+    <div class="content">
+      <div class="card">
+        <div class="card-top">
+          <span>A LETTER FOR YOU</span>
+          <span>WITH LOVE ♡</span>
+        </div>
+
+        <h2>Dear <em>Sayang,</em></h2>
+
+        <p id="typed"></p>
+
+        <div class="signature" id="signature"></div>
+      </div>
+
+      <div class="actions">
+        <button class="btn light" onclick="restartLetter()">
+          READ AGAIN ↺
+        </button>
+
+        <button class="btn" onclick="goTo(3)">
+          ONE MORE THING →
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 4: SPOTIFY ALBUM -->
+  <section class="slide">
+    <div class="content">
+      <div class="eyebrow">Step three · A little soundtrack</div>
+
+      <h2>Press play,<br><em>think of me.</em></h2>
+
+      <p class="intro">
+        Here's an album I wanted to share with you.
+        Let it play while you read this little message.
+      </p>
+
+      <div class="music-card">
+        <div class="music-head">
+          <div class="album-art">♫</div>
+
+          <div>
+            <div class="music-title">Your little playlist</div>
+            <div class="music-sub">
+              Spotify album<br>
+              picked with love, for you.
+            </div>
+          </div>
+        </div>
+
+        <iframe
+          src="https://open.spotify.com/embed/album/2jX6yKrWw9bY7JAYHhhtqZ?utm_source=generator"
+          height="352"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy">
+        </iframe>
+
+        <p class="music-note">
+          Tap play to listen. Spotify playback may require an internet
+          connection or a Spotify account.
+        </p>
+
+        <a
+          class="spotify-link"
+          href="https://open.spotify.com/album/2jX6yKrWw9bY7JAYHhhtqZ?si=Lt5-WgRwShOtm2_Wi9rCRQ&utm_source=copy-link"
+          target="_blank"
+          rel="noopener">
+          Open this album in Spotify ↗
+        </a>
+      </div>
+
+      <div class="actions">
+        <button class="btn light" onclick="goTo(2)">← BACK</button>
+        <button class="btn" onclick="goTo(4)">LAST PAGE ♡</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 5: CLOSING -->
+  <section class="slide">
+    <div class="content center">
+      <div class="flower-garden">
+        <span class="flower">❀</span>
+        <span class="flower">✿</span>
+        <span class="flower">❀</span>
+      </div>
+
+      <div class="eyebrow">One last thing</div>
+
+      <h2>You're my<br><em>favorite feeling.</em></h2>
+
+      <div class="divider"></div>
+
+      <p class="closing">
+        "If I could choose a thousand times,
+        I'd still find my way back to you."
+      </p>
+
+      <p class="intro">
+        Thank you for being you, sayang.
+        I hope this little corner made you smile.
+      </p>
+
+      <button class="btn" onclick="goTo(0)">
+        START AGAIN ↺
+      </button>
+
+      <p style="font-size:10px;color:#888;margin-top:23px;">
+        made with love, always. ♡
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<div class="progress" id="progress">
+  <span class="active"></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<div class="nav-buttons">
+  <button class="arrow" id="prev"
+    onclick="goTo(current - 1)" aria-label="Previous page">←</button>
+
+  <button class="arrow" id="next"
+    onclick="goTo(current + 1)" aria-label="Next page">→</button>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const progress = document.querySelectorAll('.progress span');
+const counter = document.getElementById('counter');
+const prev = document.getElementById('prev');
+const next = document.getElementById('next');
+
+let current = 0;
+let typingTimer = null;
+let typingIndex = 0;
+
+const letter = `I don't think words could ever explain how much happiness you bring into my life.
+
+You make ordinary days feel a little softer, and somehow, even the smallest moments become special when you're part of them.
+
+I hope you always remember that you're loved, appreciated, and thought of more often than you know. I hope I can keep making you smile, even on the days when everything feels a little too much.
+
+If love could grow into flowers, I'd give you an endless garden.
+
+Thank you for being you, sayang. I'm really, really glad I found you. ♡`;
+
+function goTo(page) {
+  if (page < 0 || page >= slides.length || page === current) return;
+
+  slides[current].classList.remove('active');
+  current = page;
+  slides[current].classList.add('active');
+
+  counter.textContent =
+    String(current + 1).padStart(2, '0') +
+    ' / ' +
+    String(slides.length).padStart(2, '0');
+
+  progress.forEach((item, i) => {
+    item.classList.toggle('active', i === current);
+  });
+
+  prev.disabled = current === 0;
+  next.disabled = current === slides.length - 1;
+
+  if (current === 2) {
+    restartLetter();
+  }
+
+  if (current === 0) {
+    clearTimeout(typingTimer);
+  }
+}
+
+function restartLetter() {
+  clearTimeout(typingTimer);
+  typingIndex = 0;
+
+  const typed = document.getElementById('typed');
+  const signature = document.getElementById('signature');
+
+  typed.innerHTML = '<span class="cursor"></span>';
+  signature.textContent = '';
+
+  function typeNext() {
+    if (typingIndex < letter.length) {
+      const cursor = typed.querySelector('.cursor');
+      const char = letter.charAt(typingIndex);
+
+      cursor.insertAdjacentText('beforebegin', char);
+      typingIndex++;
+
+      typingTimer = setTimeout(
+        typeNext,
+        char === '\n' ? 240 : 30
+      );
+    } else {
+      signature.textContent = 'Always, with love. ♡';
+    }
+  }
+
+  typeNext();
+}
+
+// Floating white and silver petals
+const petals = document.getElementById('petals');
+const symbols = ['✧', '✿', '❀', '·'];
+
+for (let i = 0; i < 18; i++) {
+  const petal = document.createElement('span');
+
+  petal.className = 'petal';
+  petal.textContent =
+    symbols[Math.floor(Math.random() * symbols.length)];
+
+  petal.style.left = Math.random() * 100 + '%';
+  petal.style.animationDuration =
+    (9 + Math.random() * 12) + 's';
+  petal.style.animationDelay =
+    (-Math.random() * 20) + 's';
+  petal.style.fontSize =
+    (10 + Math.random() * 14) + 'px';
+
+  petals.appendChild(petal);
+}
+
+prev.disabled = true;
+next.disabled = false;
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'ArrowRight') goTo(current + 1);
+  if (event.key === 'ArrowLeft') goTo(current - 1);
+});
+</script>
+
+</body>
+</html>
